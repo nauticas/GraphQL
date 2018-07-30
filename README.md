@@ -8,7 +8,38 @@ GraphQL adalah sebuah konsep baru dalam membangun sebuah API dimana kita di beri
 
 ## PERBEDAAN
 
-perbedaan dengan REST API adalah 
+Perbedaan mencolok antara GraphQL dengan REST API adalah struktur output data yang fleksibel. Contoh REST API, ketika kita ingin mendapatkan data teman dari suatu user maka frontend / client akan me request kepada server dengan format seperti berikut :
+
+> GET /users/12/friends/
+
+Cara membaca nya adalah tampilkan teman user dengan id 12, ketika client me request endpoint tersebut maka server akan menampilkan list teman user dengan id 12. Dengan mekanisme seperti ini, yang mendefinisikan data adalah **server** maksudnya adalah yang menentukan data user apa saja yang akan diberikan kepada client seperti nama, alamat, telepon, dll adalah **server.**
+
+```
+{ 
+  user(id: 1){ 
+      nama, 
+      alamat,
+      friends(limit:10){ 
+          nama
+      } 
+  } 
+}
+```
+
+Sedangkan jika kita menggunakan GraphQL maka yang akan mendefinisikan data yang dibutuhkan adalah pada sisi client (Frontend atau aplikasi). Mobile apps atau Frontend dapat sesuka hati dalam menentukan data apa saja yang dibutuhkan dan sesuai dengan komponen aplikasi yang sedang dikerjakan.
+
+Pada contoh query GraphQL diatas artinya adalah client meminta user dengan attribute nama dan alamat beserta teman nya dengan attribute nama saja.
+
+Dengan menggunakan mekanisme GraphQL ini maka :
+
+- Hanya terdapat 1 buah endpoint untuk berkomunikasi dengan server untuk mendapatkan suatu data.
+- Client/Aplikasi dapat mendefinisikan data yang akan dibutuhkan sesuka hati sehingga akan meningkatkan efisiensi mengkonsumsi API dan Hemat pertukaran data.
+
+Keunggulan GraphQL yang lain adalah mengatasi *overfetching*.
+
+*Overfetching* atau pengambilan data berlebih adalah di mana *client* mendapatkan lebih banyak data daripada yang dibutuhkan komponen fitur tertentu.
+
+Selain itu keunggulan lain nya adalah mendukung *rapid development* di *front end.* Karena seperti yang sudah dijelaskan diatas, dengan GraphQL kita bisa mendefinisikan sendiri data yang kita mau tanpa harus meminta *backend*untuk menyediakan data yang baru lagi yang mana akan membuat proses *development* pada frontend akan menjadi terhambat karena harus menunggu *backend* untuk menambahkan datanya dan membuat endpoint baru.
 
 ## Install GraphQL Lumen
 Tambahkan depedency berikut ini 
